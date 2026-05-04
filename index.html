@@ -72,33 +72,62 @@
 
     /* ===== MODERN HEADER / HERO ===== */
     .hero {
-      background: #0b1e33;
+      min-height: 85vh;
+      display: flex;
+      align-items: flex-start;
       position: relative;
-      overflow: hidden;
-      padding: 70px 0 70px;
-      isolation: isolate;
+      padding-top: 4rem;
+      background-color: #0b1e33;
     }
 
     .hero::before {
       content: "";
       position: absolute;
-      top: -20%;
-      right: -5%;
-      width: 650px;
-      height: 650px;
-      background: radial-gradient(circle at 70% 40%, rgba(56, 189, 248, 0.18) 0%, rgba(15, 23, 42, 0) 70%);
-      border-radius: 50%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("./github-banner.png") no-repeat center center;
+      background-size: cover;
       z-index: 0;
     }
 
     .hero::after {
       content: "";
       position: absolute;
-      bottom: -15%;
-      left: -8%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle at 30% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(11, 30, 51, 0.85) 20%,
+        rgba(11, 30, 51, 0.6) 45%,
+        rgba(11, 30, 51, 0.2) 70%,
+        transparent 100%
+      );
+      z-index: 1;
+    }
+
+    .hero .bg-effect-1 {
+      position: absolute;
+      top: -20%;
+      right: -5%;
+      width: 40vw;  /* ← usa vw en lugar de pixeles fijos */
+      height: 40vw;
+      max-width: 650px;
+      max-height: 650px;
+      background: radial-gradient(circle at 70% 40%, rgba(56, 189, 248, 0.18) 0%, rgba(15, 23, 42, 0) 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .hero .bg-effect-2 {
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 35vw;
+      height: 35vw;
+      max-width: 500px;
+      max-height: 500px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, rgba(15, 23, 42, 0) 70%);
       border-radius: 50%;
       z-index: 0;
     }
@@ -107,27 +136,39 @@
       position: relative;
       z-index: 2;
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2.5rem;
+      justify-content: center;
+      width: 100%;
     }
 
     .hero-text {
-      flex: 1 1 500px;
+      text-align: center;
+      width: 100%;
     }
 
     .hero-name {
-      font-size: 3.8rem;
+      font-size: 4.2rem;
       font-weight: 700;
-      letter-spacing: -0.03em;
       color: white;
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
+      letter-spacing: -0.03em;
       background: linear-gradient(to right, #ffffff, #b9c7dd);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .hero-name {
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero-title {
@@ -160,58 +201,11 @@
       letter-spacing: -0.01em;
     }
 
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-    }
-
-    .nav-links a {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(5px);
-      padding: 0.6rem 1.4rem;
-      border-radius: 40px;
-      color: #f1f5f9;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      transition: all 0.2s ease;
-      display: inline-block;
-    }
-
-    .nav-links a:hover {
-      background: #2563eb;
-      border-color: #2563eb;
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px -10px rgba(37, 99, 235, 0.5);
-    }
-
     .hero-visual {
       flex: 0 0 200px;
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-
-    .avatar-frame {
-      width: 160px;
-      height: 160px;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 20px 35px -10px rgba(37, 99, 235, 0.3);
-      border: 3px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .avatar-initials {
-      font-size: 4rem;
-      font-weight: 700;
-      color: white;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
     /* ===== CARDS & LAYOUTS ===== */
@@ -383,51 +377,35 @@
       .container {
         padding: 0 24px;
       }
+      
+      .hero {
+        min-height: 50vh;
+        padding-top: 2rem;
+      }
+      
+      .hero .bg-effect-1,
+      .hero .bg-effect-2 {
+        display: none;
+      }
+
       .hero-name {
-        font-size: 2.8rem;
-      }
-      .hero-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hero-title {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .nav-links {
-        justify-content: center;
+        font-size: 2.5rem;
       }
     }
   </style>
 </head>
 <body>
   <header class="hero">
-    <div class="container hero-content">
-      <div class="hero-text">
-        <div class="hero-name">Julio Vergara</div>
-        <div class="hero-title">
-          Senior Software Engineer · Backend Architecture · Laravel & Scalable Systems
-        </div>
-        <div class="hero-badge-group">
-          <span class="badge">20+ Yrs Experience</span>
-          <span class="badge">Laravel Ecosystem</span>
-          <span class="badge">Technical Leadership</span>
-        </div>
-        <div class="nav-links">
-          <a href="#summary">Summary</a>
-          <a href="#projects">Projects</a>
-          <a href="#architecture">Architecture</a>
-          <a href="#skills">Expertise</a>
-          <a href="#leadership">Leadership</a>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="avatar-frame">
-          <span class="avatar-initials">JV</span>
-        </div>
+  <div class="bg-effect-1"></div>
+  <div class="bg-effect-2"></div>
+  <div class="container hero-content">
+    <div class="hero-text">
+      <div class="hero-name">
+        Julio Vergara
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
   <main class="container">
     <!-- Professional Summary -->
